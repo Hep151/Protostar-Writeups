@@ -1,6 +1,6 @@
 # Stack3
 ## Briefing
-Stack3 looks at environment variables, and how they can be set, and overwriting function pointers stored on the stack (as a prelude to overwriting the saved EIP)
+Stack3 looks at environment variables, and how they can be set, and overwriting function pointers stored on the stack (as a prelude to overwriting the saved EIP).
 
 Hint:
 
@@ -64,7 +64,7 @@ The `p win` command gives us the position of win, which we can see now is at
 0x8048424
 
 This is where the 'struct' python module comes in!
-We edit our script to use this memory address
+We can now edit our script to use this memory address.
 ```
 import struct
 rp = struct.pack('<L', 0x8048424)
