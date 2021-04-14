@@ -27,7 +27,7 @@ int main(int argc, char **argv)
 Stack5 is an actual buffer overflow exploit with shellcode.
 The idea is this:
 We put in, PADDING + RETURN + NOPS + SHELLCODE/TRAP.
-The padding fills up the buffer until we are overwriting the return address, so we will start with that and come onto the other things.later, lets do the usual approach.
+The padding fills up the buffer until we are overwriting the return address, so we will start with that and come onto the other things later, lets do the usual approach.
 ```
 exploit = ''
 exploit += 'A' * 64
@@ -40,7 +40,7 @@ When feeding this to the program we get a fault at 0x45454545 again.
 Program recieved signal SIGSEGV, Segmentation fault. 
 0x45454545 in ?? ()
 ```
-Like stack4 we now know that we can enter 76 letters until we overwrite the return address.
+Like Stack4 we now know that we can enter 76 letters until we overwrite the return address.
 Our exploit now looks like this: 76 letters + RETURN + NOPS + SHELLCODE/TRAP.
 Now we are going to add our NOPs and a code execution trap.
 The trap, '\xcc' stops code execution completely when ran by the program, if we hit the trap it means that our code is being executed by the program, then we can simply swap the trap out for some working shellcode.
